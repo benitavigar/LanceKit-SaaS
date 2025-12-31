@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+@media print {
+
+  /* HIDE EVERYTHING by default */
+  body * {
+    visibility: hidden;
+  }
+
+  /* STRICTLY HIDE LAYOUT ELEMENTS */
+  /* This fixes the issue where the header/sidebar might still take space or show up */
+  nav,
+  aside,
+  header,
+  .layout-header,
+  .layout-sidebar {
+    display: none !important;
+  }
+
+  /* Only show the invoice and its children */
+  #printable-invoice,
+  #printable-invoice * {
+    visibility: visible;
+  }
+
+  /* Position the invoice at the very top-left of the page */
+  #printable-invoice {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    background: white !important;
+  }
+
+  /* Reset body/app constraints */
+  #app,
+  body,
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    overflow: visible !important;
+    background: white !important;
+  }
+
+  /* Ensure backgrounds print */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Helper to specifically hide elements inside the invoice if needed */
+  .no-print {
+    display: none !important;
+  }
+}
