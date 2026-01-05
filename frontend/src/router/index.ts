@@ -54,4 +54,20 @@ const router = createRouter({
     ]
 });
 
+// Navigation guard to protect routes
+router.beforeEach((to, from, next) => {
+    const token = localStorage.getItem('token');
+    const isPublicRoute = to.meta.public === true;
+
+    if (!token && !isPublicRoute) {
+        // User is not authenticated and trying to access protected route
+        next('/login');
+    } else if (token && (to.path === '/login' || to.path === '/register')) {
+        // User is authenticated and trying to access login/register
+        next('/');
+    } else {
+        next();
+    }
+});
+
 export default router;
